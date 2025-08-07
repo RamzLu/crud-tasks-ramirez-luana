@@ -1,19 +1,18 @@
 import { DataTypes } from "sequelize";
 
-export const User = sequelize.define(
-  "User",
-  {
-    // Model attributes are defined here
-    firstName: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-    lastName: {
-      type: DataTypes.STRING,
-      // allowNull defaults to true
-    },
+export const User = sequelize.define("User", {
+  name: {
+    type: DataTypes.STRING(100),
+    unique: true,
+    allowNull: false,
   },
-  {
-    // Other model options go here
-  }
-);
+  email: {
+    type: DataTypes.STRING(100),
+    allowNull: false,
+    unique: true,
+  },
+  password: {
+    type: DataTypes.STRING(100),
+    allowNull: false,
+  },
+});
