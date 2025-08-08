@@ -5,7 +5,7 @@ import {
   deleteUser,
   getUserById,
   upDateUser,
-} from "../controller/user.controllers.js";
+} from "../controller/user.controller.js";
 export const routerUser = Router();
 
 routerUser.get("/user", getAllUsers);
