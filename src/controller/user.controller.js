@@ -30,8 +30,33 @@ export const getUserById = async (req, res) => {
 
 export const createUser = async (req, res) => {
   try {
+    // -------------------------------------VALIDACIONES---------------------------------------------------------------
     console.log(req.body);
     const { name, email, password } = req.body;
+    if (!name || name.length > 100) {
+      return res.status(400).json({
+        error: "The name is empty or exceeds 100 characters.",
+      });
+    }
+    if (!password || password.length > 100) {
+      return res.status(400).json({
+        error: "The password is empty or exceeds 100 characters.",
+      });
+    }
+    // pa verificar si el email existe
+    const emailExist = await User.findOne({ where: { email } });
+    if (emailExist) {
+      return res.status(500).json({
+        msg: "This email already exist.",
+      });
+    }
+
+    if (!email || email.length > 100) {
+      return res.status(400).json({
+        error: "The email is empty or exceeds 100 characters",
+      });
+    }
+    // ----------------------------------------------------------------------------------------------------
     console.log(name, email, password);
     const user = await User.create(req.body);
     console.log(user);
@@ -46,14 +71,39 @@ export const createUser = async (req, res) => {
 
 export const upDateUser = async (req, res) => {
   try {
-    console.log(
-      "---------------------------------------------------------------------"
-    );
+    console.log("-------------------------------");
     console.log("ID recibido:", req.params.id);
     console.log("Datos a actualizar:", req.body);
-    console.log(
-      "---------------------------------------------------------------------"
-    );
+    console.log("-------------------------------");
+
+    // -----------------------------VALIDACIONES----------------------------------------
+    const { name, email, password } = req.body;
+    if (!name || name.length > 100) {
+      return res.status(400).json({
+        error: "The name is empty or exceeds 100 characters",
+      });
+    }
+    // pa verificar si el email existe
+    const emailExist = await User.findOne({ where: { email } });
+    if (emailExist) {
+      return res.status(500).json({
+        msg: "This email already exist.",
+      });
+    }
+
+    if (!email || email.length > 100) {
+      return res.status(400).json({
+        error: "The email is empty or exceeds 100 characters",
+      });
+    }
+
+    if (!password || password.length > 100) {
+      return res.status(400).json({
+        error: "The password is empty or exceeds 100 characters.",
+      });
+    }
+    // ---------------------------------------------------------------------------------------
+
     const [update] = await User.update(req.body, {
       where: { id: req.params.id },
     });
