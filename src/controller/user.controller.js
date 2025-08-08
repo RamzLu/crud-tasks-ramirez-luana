@@ -29,10 +29,9 @@ export const getUserById = async (req, res) => {
 };
 
 export const createUser = async (req, res) => {
-  console.log(req.body);
   try {
+    console.log(req.body);
     const { name, email, password } = req.body;
-
     console.log(name, email, password);
     const user = await User.create(req.body);
     console.log(user);
