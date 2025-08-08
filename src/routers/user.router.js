@@ -9,11 +9,7 @@ import {
 export const routerUser = Router();
 
 routerUser.get("/user", getAllUsers);
-
 routerUser.post("/user", createUser);
-
 routerUser.get("/user/:id", getUserById);
-
 routerUser.put("/user/:id", upDateUser);
-
 routerUser.delete("/user/:id", deleteUser);
