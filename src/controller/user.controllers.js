@@ -13,16 +13,16 @@ export const getAllUsers = async (req, res) => {
 
 export const getUserById = async (req, res) => {
   try {
-    const user = User.findByPk(req.body.id);
-    if (movie) {
+    const user = await User.findByPk(req.params.id);
+    if (user) {
       res.json(user);
     } else {
-      return res.status(404).json({
-        mesagge: "User not found.",
+      res.status(404).json({
+        msg: "Personaje no encontrado",
       });
     }
   } catch (error) {
-    return res.status(501).json({
+    res.status(501).json({
       error: error.mesagge,
     });
   }
@@ -47,29 +47,56 @@ export const createUser = async (req, res) => {
 
 export const upDateUser = async (req, res) => {
   try {
-    const [update] = User.update(req.body, { where: { id: req.params.id } });
+    console.log(
+      "---------------------------------------------------------------------"
+    );
+    console.log("ID recibido:", req.params.id);
+    console.log("Datos a actualizar:", req.body);
+    console.log(
+      "---------------------------------------------------------------------"
+    );
+    const [update] = await User.update(req.body, {
+      where: { id: req.params.id },
+    });
+
     if (update) {
-      const user = User.findByPk(req.params.id);
-      return res.status(201).json(user);
+      const user = await User.findByPk(req.params.id);
+      console.log(user);
+      return res.status(201).json({
+        msg: "The user has been updated successfully.",
+        user: user,
+      });
     } else {
+      console.log("The user to update has not been found.");
       return res.status(404).json({
-        mesagge: "User not found.",
+        msg: "The user to update has not been found.",
       });
     }
   } catch (error) {
+    console.error(error);
     return res.status(501).json({
-      error: error.mesagge,
+      error: error.message,
     });
   }
 };
 
 export const deleteUser = async (req, res) => {
   try {
-    const deleted = User.destroy({ where: { id: req.params.id } });
-    if (deleted) {
-      return res.status(201).json({
-        mesagge: "User deleted successfully.",
+    const user = await User.findByPk(req.params.id);
+    if (!user) {
+      return res.status(404).json({
+        error: "User not found.",
       });
     }
-  } catch (error) {}
+    console.log(user);
+    await User.destroy({ where: { id: req.params.id } });
+    return res.status(200).json({
+      mesagge: "User deleted successfully.",
+      user: user,
+    });
+  } catch (error) {
+    return res.status(501).json({
+      error: error.mesagge,
+    });
+  }
 };
