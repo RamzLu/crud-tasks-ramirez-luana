@@ -1,0 +1,26 @@
+GET http://localhost:4000/api/task
+
+####
+
+POST http://localhost:4000/api/task
+Content-Type: application/json
+
+{
+  "title": "ddsadsds",
+  "description": "Descripción de la nueva tarea",
+  "isComplete": false
+}
+####
+PUT http://localhost:4000/api/task/11
+Content-Type: application/json
+
+{
+  "title": "Tarea dsaasdsasadddlizada",
+  "description": "Descripción actualizada de la tarea",
+  "isComplete": true
+}
+####
+GET http://localhost:4000/api/task/4
+
+####
+DELETE http://localhost:4000/api/task/4

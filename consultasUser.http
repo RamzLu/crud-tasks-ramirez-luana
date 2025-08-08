@@ -1,0 +1,27 @@
+GET http://localhost:4000/api/user
+####
+POST http://localhost:4000/api/user
+Content-Type: application/json
+
+{
+  "name": "lILcIsT",
+  "email": "juan@udDSdsvadagf.com",
+  "password": "vxcvx"
+}
+
+####
+PUT http://localhost:4000/api/user/6
+Content-Type: application/json
+
+{
+  "name": "fddss",
+  "email": "juan@eadmfle.com",
+  "password": ""
+}
+
+####
+DELETE http://localhost:4000/api/user/2
+
+####
+
+GET http://localhost:4000/api/user/2
