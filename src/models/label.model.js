@@ -1,5 +1,7 @@
 import { DataTypes } from "sequelize";
 import { sequelize } from "../config/database.js";
+import { Task } from "./task.model.js";
+import { labelTask } from "./labelTask.model.js";
 
 export const Labels = sequelize.define(
   "Labels",
@@ -14,3 +16,7 @@ export const Labels = sequelize.define(
     timestamps: false,
   }
 );
+// las tareas pueden tener muchas etiquetas
+Task.belongsToMany(Labels, { through: labelTask, foreignKey: "task_id" });
+// y las etiquetas pueden pertenecer a muchas tareas
+Labels.belongsToMany(Task, { through: labelTask, foreignKey: "label_id" });
