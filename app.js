@@ -4,6 +4,9 @@ dotenv.config();
 import { routerUser } from "./src/routers/user.router.js";
 import { startDB } from "./src/config/database.js";
 import { routerTask } from "./src/routers/task.router.js";
+import { labelTask } from "./src/models/labelTask.model.js";
+import { Labels } from "./src/models/label.model.js";
+import { UserProfile } from "./src/models/userProfile.model.js";
 
 const PORT = process.env.PORT;
 const app = express();
