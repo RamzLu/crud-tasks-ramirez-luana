@@ -1,5 +1,6 @@
 import { DataTypes } from "sequelize";
 import { sequelize } from "../config/database.js";
+import { UserProfile } from "./userProfile.model.js";
 
 export const User = sequelize.define(
   "User",
@@ -23,3 +24,8 @@ export const User = sequelize.define(
     timestamps: false,
   }
 );
+
+// Al user le pertenece UN perfil
+User.belongsTo(UserProfile, { foreignKey: "profile_id", as: "User_Profile" });
+// el perfil le pertenece a UN usuario
+UserProfile.hasOne(User, { foreignKey: "profile_id" });
