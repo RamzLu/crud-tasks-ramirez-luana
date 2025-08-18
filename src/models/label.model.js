@@ -17,6 +17,14 @@ export const Labels = sequelize.define(
   }
 );
 // las tareas pueden tener muchas etiquetas
-Task.belongsToMany(Labels, { through: labelTask, foreignKey: "task_id" });
+Task.belongsToMany(Labels, {
+  through: labelTask,
+  foreignKey: "task_id",
+  as: "tags",
+});
 // y las etiquetas pueden pertenecer a muchas tareas
-Labels.belongsToMany(Task, { through: labelTask, foreignKey: "label_id" });
+Labels.belongsToMany(Task, {
+  through: labelTask,
+  foreignKey: "label_id",
+  as: "tasks",
+});
