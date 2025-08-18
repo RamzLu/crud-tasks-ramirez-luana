@@ -1,8 +1,39 @@
+import { Labels } from "../models/label.model.js";
+import { labelTask } from "../models/labelTask.model.js";
 import { Task } from "../models/task.model.js";
+import { User } from "../models/user.model.js";
+import { UserProfile } from "../models/userProfile.model.js";
 
 export const getAllTask = async (req, res) => {
   try {
-    const task = await Task.findAll(req.body);
+    const task = await Task.findAll({
+      attributes: {
+        exclude: ["user_id"],
+      },
+      include: [
+        {
+          model: User,
+          as: "author",
+          attributes: {
+            exclude: ["password", "profile_id"],
+          },
+          include: [
+            {
+              model: UserProfile,
+              as: "profile",
+            },
+          ],
+        },
+        {
+          model: Labels,
+          as: "tags",
+          through: {
+            attributes: [],
+          },
+        },
+      ],
+    });
+
     return res.json(task);
   } catch (error) {
     return res.status(501).json({
