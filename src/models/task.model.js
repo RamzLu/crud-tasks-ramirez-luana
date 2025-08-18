@@ -24,7 +24,7 @@ export const Task = sequelize.define(
   }
 );
 
+// las tareas le pueden pertenecer a un único usuario
+Task.belongsTo(User, { foreignKey: "user_id", as: "author" });
 // un usuario puede tener muchas tareas
 User.hasMany(Task, { foreignKey: "user_id" });
-// las tareas le pueden pertenecer a un único usuario
-Task.belongsTo(User, { foreignKey: "user_id" });
