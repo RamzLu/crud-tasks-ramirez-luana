@@ -4,9 +4,10 @@ POST http://localhost:4000/api/user
 Content-Type: application/json
 
 {
-  "name": "Juan Pérez",
+  "name": "Pedrito245",
   "email": "juan@gmail.com",
-  "password": "123456"
+  "password": "123456",
+  "profile_id": 1
 }
 
 ####
