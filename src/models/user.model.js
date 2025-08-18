@@ -26,6 +26,6 @@ export const User = sequelize.define(
 );
 
 // Al user le pertenece UN perfil
-User.belongsTo(UserProfile, { foreignKey: "profile_id", as: "User_Profile" });
+User.belongsTo(UserProfile, { foreignKey: "profile_id", as: "profile" });
 // el perfil le pertenece a UN usuario
 UserProfile.hasOne(User, { foreignKey: "profile_id" });

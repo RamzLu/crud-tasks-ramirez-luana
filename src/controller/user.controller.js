@@ -1,8 +1,40 @@
+import { Labels } from "../models/label.model.js";
+import { Task } from "../models/task.model.js";
 import { User } from "../models/user.model.js";
+import { UserProfile } from "../models/userProfile.model.js";
 
 export const getAllUsers = async (req, res) => {
   try {
-    const user = await User.findAll(req.body);
+    const user = await User.findAll({
+      attributes: {
+        exclude: ["profile_id", "password"],
+      },
+      include: [
+        {
+          model: UserProfile,
+          as: "profile",
+        },
+        {
+          model: Task,
+          as: "tasks",
+          attributes: {
+            exclude: ["user_id"],
+          },
+          include: [
+            {
+              model: Labels,
+              as: "tags",
+              through: {
+                attributes: [],
+              },
+              attributes: {
+                exclude: ["id"],
+              },
+            },
+          ],
+        },
+      ],
+    });
     return res.json(user);
   } catch (error) {
     res.status(501).json({
@@ -13,7 +45,36 @@ export const getAllUsers = async (req, res) => {
 
 export const getUserById = async (req, res) => {
   try {
-    const user = await User.findByPk(req.params.id);
+    const user = await User.findByPk(req.params.id, {
+      attributes: {
+        exclude: ["profile_id"],
+      },
+      include: [
+        {
+          model: UserProfile,
+          as: "profile",
+        },
+        {
+          model: Task,
+          as: "tasks",
+          attributes: {
+            exclude: ["user_id"],
+          },
+          include: [
+            {
+              model: Labels,
+              as: "tags",
+              through: {
+                attributes: [],
+              },
+              attributes: {
+                exclude: ["id"],
+              },
+            },
+          ],
+        },
+      ],
+    });
     if (user) {
       res.json(user);
     } else {
