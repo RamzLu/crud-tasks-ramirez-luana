@@ -63,7 +63,7 @@ export const createTask = async (req, res) => {
   try {
     // -----------------------------------------VALIDACIONES-----------------------------------------------------------
     console.log(req.body);
-    const { title, description, isComplete } = req.body;
+    const { title, description, isComplete, user_id } = req.body;
     if (!title || title.length > 100) {
       return res.status(400).json({
         error: "The title is empty or exceeds 100 characters",
@@ -81,6 +81,13 @@ export const createTask = async (req, res) => {
         error: "The value must not be empty and must be boolean.",
       });
     }
+
+    if (!user_id) {
+      return res.status(400).json({
+        error: "You must provide a valid or existing user ID.",
+      });
+    }
+
     // ----------------------------------------------------------------------------------------------------------------
 
     const task = await Task.create(req.body);
@@ -88,7 +95,7 @@ export const createTask = async (req, res) => {
     return res.json(task);
   } catch (error) {
     return res.status(500).json({
-      error: error.mesagge,
+      error: error.message,
     });
   }
 };
