@@ -1,28 +1,12 @@
-GET http://localhost:4000/api/user
+get http://localhost:4000/api/profiles
+
 ####
-POST http://localhost:4000/api/user
+post http://localhost:4000/api/profiles
 Content-Type: application/json
 
 {
-  "name": "Pedrito245",
-  "email": "juan@gmail.com",
-  "password": "123456",
-  "profile_id": 1
+  "real_name": "Descongelar el pollo",
+  "bio": "Descripción de la nueva tarea",
+  "birthdate": "2023-10-01"
 }
 
-####
-PUT http://localhost:4000/api/user/6
-Content-Type: application/json
-
-{
-  "name": "Juan Pérez Actlio",
-  "email": "juan@eamle.com",
-  "password": "12356"
-}
-
-####
-DELETE http://localhost:4000/api/user/2
-
-####
-
-GET http://localhost:4000/api/user/1

@@ -23,7 +23,7 @@ Content-Type: application/json
   "user_id": 1
 }
 ####
-GET http://localhost:4000/api/task/1
+GET http://localhost:4000/api/task/11
 
 ####
 DELETE http://localhost:4000/api/task/1
