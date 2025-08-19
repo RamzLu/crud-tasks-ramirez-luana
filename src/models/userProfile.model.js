@@ -13,7 +13,7 @@ export const UserProfile = sequelize.define(
       allowNull: false,
     },
     birthdate: {
-      type: DataTypes.DATEONLY,
+      type: DataTypes.DATE,
       allowNull: false,
     },
   },
