@@ -47,7 +47,7 @@ export const getUserById = async (req, res) => {
   try {
     const user = await User.findByPk(req.params.id, {
       attributes: {
-        exclude: ["profile_id"],
+        exclude: ["profile_id", "password"],
       },
       include: [
         {
@@ -79,7 +79,7 @@ export const getUserById = async (req, res) => {
       res.json(user);
     } else {
       res.status(404).json({
-        msg: "Personaje no encontrado",
+        msg: "The user could not be found or does not exist.",
       });
     }
   } catch (error) {

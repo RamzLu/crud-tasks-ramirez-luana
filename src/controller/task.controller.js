@@ -44,7 +44,26 @@ export const getAllTask = async (req, res) => {
 
 export const getTaskById = async (req, res) => {
   try {
-    const task = await Task.findByPk(req.params.id);
+    const task = await Task.findByPk(req.params.id, {
+      attributes: {
+        exclude: ["user_id"],
+      },
+      include: [
+        {
+          model: User,
+          as: "author",
+          attributes: {
+            exclude: ["password", "profile_id"],
+          },
+          include: [
+            {
+              model: UserProfile,
+              as: "profile",
+            },
+          ],
+        },
+      ],
+    });
     if (task) {
       return res.json(task);
     } else {
