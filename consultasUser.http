@@ -6,7 +6,8 @@ Content-Type: application/json
 {
   "name": "lILcIsT",
   "email": "juan@udDSdsvadagf.com",
-  "password": "vxcvx"
+  "password": "vxcvx",
+  "profile_id": 1
 }
 
 ####
