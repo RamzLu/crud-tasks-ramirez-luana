@@ -1,28 +1,27 @@
 GET http://localhost:4000/api/user
 ####
+
+GET http://localhost:4000/api/user/1
+####
 POST http://localhost:4000/api/user
 Content-Type: application/json
 
 {
-  "name": "lILcIsT",
-  "email": "juan@udDSdsvadagf.com",
-  "password": "vxcvx",
-  "profile_id": 1
+  "name": "pepe45",
+  "email": "ppppepe697@gmail.com",
+  "password": "1234598",
+  "profile_id": 3
 }
 
 ####
-PUT http://localhost:4000/api/user/6
+PUT http://localhost:4000/api/user/1
 Content-Type: application/json
 
 {
-  "name": "fddss",
-  "email": "juan@eadmfle.com",
-  "password": ""
+  "name": "patinetakiller",
+  "email": "patinetakiller564@gmail.com",
+  "password": "1234598"
 }
 
 ####
 DELETE http://localhost:4000/api/user/3
-
-####
-
-GET http://localhost:4000/api/user/3

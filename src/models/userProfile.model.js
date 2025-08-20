@@ -10,7 +10,7 @@ export const UserProfile = sequelize.define(
     },
     bio: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: true,
     },
     birthdate: {
       type: DataTypes.DATE,
