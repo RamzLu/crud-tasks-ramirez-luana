@@ -62,6 +62,10 @@ export const getTaskById = async (req, res) => {
             },
           ],
         },
+        {
+          model: Labels,
+          as: "tags",
+        },
       ],
     });
     if (task) {

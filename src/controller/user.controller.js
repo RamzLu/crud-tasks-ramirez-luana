@@ -1,3 +1,4 @@
+import { Op } from "sequelize";
 import { Labels } from "../models/label.model.js";
 import { Task } from "../models/task.model.js";
 import { User } from "../models/user.model.js";
@@ -92,7 +93,6 @@ export const getUserById = async (req, res) => {
 export const createUser = async (req, res) => {
   try {
     // -------------------------------------VALIDACIONES---------------------------------------------------------------
-    console.log(req.body);
     const { name, email, password } = req.body;
     if (!name || name.length > 100) {
       return res.status(400).json({
@@ -144,12 +144,19 @@ export const upDateUser = async (req, res) => {
         error: "The name is empty or exceeds 100 characters",
       });
     }
-    // pa verificar si el email existe
-    const emailExist = await User.findOne({ where: { email } });
-    if (emailExist) {
-      return res.status(500).json({
-        msg: "This email already exist.",
+    // validación de email
+    if (email) {
+      // nos fijamos que no exista otro usuario con el mismo email
+      const existEmail = await User.findOne({
+        where: {
+          email,
+          id: { [Op.ne]: req.params.id }, // excluye el mismo id
+        },
       });
+
+      if (existEmail) {
+        return res.status(400).json({ msg: "This email is already in use." });
+      }
     }
 
     if (!email || email.length > 100) {
