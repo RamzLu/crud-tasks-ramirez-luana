@@ -18,9 +18,9 @@ const app = express();
 
 app.use(express.json());
 app.use("/api", routerUser);
-app.use("/api", routerTask);
 app.use("/api", routerProfile);
 app.use("/api", routerLabel);
+app.use("/api", routerTask);
 app.use("/api", routerLabeltask);
 app.listen(PORT, async () => {
   await startDB();
