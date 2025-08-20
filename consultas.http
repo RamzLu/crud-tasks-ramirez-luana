@@ -1,12 +1,24 @@
 get http://localhost:4000/api/profiles
 
 ####
+get http://localhost:4000/api/profiles/2
+####
+
 post http://localhost:4000/api/profiles
 Content-Type: application/json
 
 {
-  "real_name": "Descongelar el pollo",
-  "bio": "Descripción de la nueva tarea",
-  "birthdate": "2023-10-01"
+  "real_name": "Peron Sanchez",
+  "bio": "Developer and tech enthusiast.",
+  "birthdate": "1990-05-19"
+}
+####
+put http://localhost:4000/api/profiles/5
+Content-Type: application/json
+
+{
+  "real_name": "Peron Sanchez",
+  "bio": "Updated bio for Peron.",
+  "birthdate": "2000-01-29"
 }
 

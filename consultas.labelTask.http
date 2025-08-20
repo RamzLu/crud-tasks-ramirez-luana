@@ -1,0 +1,11 @@
+get http://localhost:4000/api/labelsTasks
+
+####
+post http://localhost:4000/api/labelTasks
+Content-Type: application/json
+
+{
+    "task_id": 1,
+    "label_id": 4
+}
+
