@@ -11,6 +11,6 @@ export const Labels = sequelize.define(
     },
   },
   {
-    timestamps: false,
+    paranoid: true,
   }
 );

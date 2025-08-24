@@ -54,3 +54,23 @@ export const getLabelById = async (req, res) => {
     });
   }
 };
+
+export const deleteLabel = async (req, res) => {
+  try {
+    const label = await Labels.findByPk(req.params.id);
+    if (!label) {
+      return res.status(404).json({
+        error: "Label not found.",
+      });
+    }
+    await label.destroy();
+    return res.status(200).json({
+      mesagge: "Label deleted successfully.",
+      label: label,
+    });
+  } catch (error) {
+    return res.status(501).json({
+      error: error.mesagge,
+    });
+  }
+};

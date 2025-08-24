@@ -8,6 +8,8 @@ POST http://localhost:4000/api/labels
 Content-Type: application/json
 
 {
-    "name_Label": "para luego"
+    "name_Label": "urgente"
 }
 
+####
+DELETE http://localhost:4000/api/labels/1
