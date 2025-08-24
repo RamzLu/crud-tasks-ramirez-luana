@@ -118,10 +118,19 @@ export const createUser = async (req, res) => {
       });
     }
     // ----------------------------------------------------------------------------------------------------
-    console.log(name, email, password);
-    const user = await User.create(req.body);
-    console.log(user);
-    return res.json(user);
+    const newUser = await User.create(req.body);
+    const userToReturn = await User.findByPk(newUser.id, {
+      attributes: {
+        exclude: ["password", "profile_id"],
+      },
+      include: [
+        {
+          model: UserProfile,
+          as: "profile",
+        },
+      ],
+    });
+    return res.json(userToReturn);
   } catch (error) {
     res.status(501).json({
       error: error.mesagge,
@@ -199,7 +208,17 @@ export const upDateUser = async (req, res) => {
 
 export const deleteUser = async (req, res) => {
   try {
-    const user = await User.findByPk(req.params.id);
+    const user = await User.findByPk(req.params.id, {
+      attributes: {
+        exclude: ["password", "profile_id"],
+      },
+      include: [
+        {
+          model: UserProfile,
+          as: "profile",
+        },
+      ],
+    });
     if (!user) {
       return res.status(404).json({
         error: "User not found.",
