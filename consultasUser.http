@@ -7,10 +7,10 @@ POST http://localhost:4000/api/user
 Content-Type: application/json
 
 {
-  "name": "pepe45",
-  "email": "ppppepe697@gmail.com",
+  "name": "patineller",
+  "email": "564@gmail.com",
   "password": "1234598",
-  "profile_id": 3
+  "profile_id": 1
 }
 
 ####
@@ -24,4 +24,4 @@ Content-Type: application/json
 }
 
 ####
-DELETE http://localhost:4000/api/user/3
+DELETE http://localhost:4000/api/user/2

@@ -8,7 +8,7 @@ post http://localhost:4000/api/profiles
 Content-Type: application/json
 
 {
-  "real_name": "Peron Sanchez",
+  "real_name": "Ernesto Ramirez",
   "bio": "Developer and tech enthusiast.",
   "birthdate": "1990-05-19"
 }
@@ -22,3 +22,5 @@ Content-Type: application/json
   "birthdate": "2000-01-29"
 }
 
+####
+delete http://localhost:4000/api/profiles/1

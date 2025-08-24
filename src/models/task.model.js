@@ -32,10 +32,3 @@ Task.belongsTo(User, {
 });
 // un usuario puede tener muchas tareas
 User.hasMany(Task, { foreignKey: "user_id", as: "tasks" });
-
-// User.addHook("afterDestroy", async (author) => {
-//   const task = await Task.findAll({
-//     where: { user_id: author.dataValues.id },
-//   });
-//   await task.destroy();
-// });
