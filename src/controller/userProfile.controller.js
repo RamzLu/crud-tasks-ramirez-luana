@@ -197,3 +197,25 @@ export const updateProfile = async (req, res) => {
     });
   }
 };
+
+export const daleteProfile = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const profile = await UserProfile.findByPk(id);
+    if (!profile) {
+      return res.status(404).json({
+        error: "Profile not found.",
+      });
+    }
+    console.log(profile);
+    await UserProfile.destroy({ where: { id: req.params.id } });
+    return res.status(200).json({
+      message: "Profile deleted successfully",
+      profile: profile,
+    });
+  } catch (error) {
+    return res.status(501).json({
+      error: error.message,
+    });
+  }
+};
