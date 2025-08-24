@@ -21,3 +21,8 @@ Labels.belongsToMany(Task, {
   foreignKey: "label_id",
   as: "tasks",
 });
+
+// la columna 'task_id' pertenece a Task
+labelTask.belongsTo(Task, { foreignKey: "task_id", as: "tasks" });
+// la columna 'label_id' pertenece a Label
+labelTask.belongsTo(Labels, { foreignKey: "label_id", as: "tags" });

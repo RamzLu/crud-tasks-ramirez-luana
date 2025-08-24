@@ -4,7 +4,15 @@ import { Task } from "../models/task.model.js";
 
 export const getAllLabelsTasks = async (req, res) => {
   try {
-    const tl = await labelTask.findAll(req.body);
+    const tl = await labelTask.findAll({
+      attributes: {
+        exclude: ["task_id", "label_id"],
+      },
+      include: [
+        { model: Task, as: "tasks" },
+        { model: Labels, as: "tags" },
+      ],
+    });
     return res.json(tl);
   } catch (error) {
     res.status(501).json({
