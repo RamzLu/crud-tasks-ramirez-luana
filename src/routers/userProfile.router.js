@@ -4,6 +4,7 @@ import {
   getAllprofiles,
   getProfileById,
   updateProfile,
+  daleteProfile,
 } from "../controller/userProfile.controller.js";
 
 export const routerProfile = Router();
@@ -12,3 +13,4 @@ routerProfile.get("/profiles", getAllprofiles);
 routerProfile.get("/profiles/:id", getProfileById);
 routerProfile.put("/profiles/:id", updateProfile);
 routerProfile.post("/profiles", createProfile);
+routerProfile.delete("/profiles/:id", daleteProfile);
