@@ -25,6 +25,17 @@ export const Task = sequelize.define(
 );
 
 // las tareas le pueden pertenecer a un único usuario
-Task.belongsTo(User, { foreignKey: "user_id", as: "author" });
+Task.belongsTo(User, {
+  foreignKey: "user_id",
+  as: "author",
+  onDelete: "CASCADE",
+});
 // un usuario puede tener muchas tareas
 User.hasMany(Task, { foreignKey: "user_id", as: "tasks" });
+
+// User.addHook("afterDestroy", async (author) => {
+//   const task = await Task.findAll({
+//     where: { user_id: author.dataValues.id },
+//   });
+//   await task.destroy();
+// });

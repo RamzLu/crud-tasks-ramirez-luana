@@ -34,9 +34,9 @@ User.belongsTo(UserProfile, {
 // el perfil le pertenece a UN usuario
 UserProfile.hasOne(User, { foreignKey: "profile_id", as: "user_associated" });
 
-UserProfile.addHook("afterDestroy", async (profile) => {
-  const user = await User.findOne({
-    where: { profile_id: profile.dataValues.id },
-  });
-  await user.destroy();
-});
+// UserProfile.addHook("afterDestroy", async (profile) => {
+//   const user = await User.findAll({
+//     where: { profile_id: profile.dataValues.id },
+//   });
+//   await user.destroy();
+// });
