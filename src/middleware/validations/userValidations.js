@@ -13,10 +13,15 @@ export const createUserValidation = [
     .isEmail()
     .withMessage("El email debe ser válido.")
     .notEmpty()
-    .withMessage("El email no puede estar vacíiio."),
+    .withMessage("El email no puede estar vacío."),
   body("password")
     .notEmpty()
-    .withMessage("El campo password no puede estar vacío."),
+    .withMessage("El campo password no puede estar vacío.")
+    .isStrongPassword()
+    .withMessage(
+      "La contraseña debe tener al menos 8 caracteres, 1 mayúscula, 1 minúcula, 1 número y al menos 1 signo especial."
+    ),
+  ,
 ];
 
 export const updateUserValidation = [
@@ -40,36 +45,15 @@ export const updateUserValidation = [
   body("email")
     .isEmail()
     .withMessage("El email debe ser válido.")
-    .isEmpty()
+    .notEmpty()
     .withMessage("El email no puede estar vacío.")
     .optional(),
   body("password")
     .optional()
     .isEmpty()
-    .withMessage("El campo password no puede estar vacío."),
+    .withMessage("El campo password no puede estar vacío.")
+    .isStrongPassword()
+    .withMessage(
+      "La contraseña debe tener al menos 8 caracteres, 1 mayúscula, 1 minúcula, 1 número y al menos 1 signo especial."
+    ),
 ];
-
-// // -------------------------------------------------------------------------------------------------------------------
-// export const updateProfileValidation = [
-//   param("id")
-//     .isInt()
-//     .withMessage("El id debe ser un entero.")
-//     .custom(async (value) => {
-//       const profile = await UserProfile.findByPk(value);
-//       if (!profile) {
-//         throw new Error("El perfil no se pudo encontrar.");
-//       }
-//     }),
-//   body("name")
-//     .optional()
-//     .isString()
-//     .withMessage("El nombre debe ser un campo de string.")
-//     .notEmpty()
-//     .withMessage("El campo nombre no puede estar vaciooooo .")
-//     .isLength({ min: 3, max: 25 })
-//     .withMessage("El nombre tieneun mínimo de 3 y máximo de 25 caracteres"),
-//   body("birthdate")
-//     .optional()
-//     .notEmpty()
-//     .withMessage("La fecha de nacimiento no puede estar vacia."),
-// ];
