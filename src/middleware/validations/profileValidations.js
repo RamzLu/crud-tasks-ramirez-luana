@@ -7,7 +7,17 @@ export const createProfileValidation = [
     .withMessage("El campo nombre no puede estar vacío."),
   body("birthdate")
     .isDate()
-    .withMessage("La fecha de nacimiento debe ser una fecha válida."),
+    .withMessage("La fecha de nacimiento debe ser una fecha válida.")
+    .custom((value) => {
+      const inputDate = new Date(value);
+      const today = new Date();
+
+      if (inputDate >= today) {
+        throw new Error("La fecha de nacimiento debe ser anterior a hoy");
+      }
+      return true;
+    }),
+  ,
   body("bio")
     .optional()
     .isLength({ min: 3, max: 100 })
