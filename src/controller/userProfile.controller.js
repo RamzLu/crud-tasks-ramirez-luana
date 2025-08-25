@@ -46,45 +46,45 @@ export const getAllprofiles = async (req, res) => {
 
 export const createProfile = async (req, res) => {
   try {
-    //-------------------------------------VALIDACIONES---------------------------------------------------------------
-    const { real_name, bio, birthdate } = req.body;
-    // si el nombre está vacio o excede los 100 caracteres
-    if (!real_name || real_name.length > 100) {
-      return res.status(400).json({
-        error: "The name is empty or exceeds 100 characters.",
-      });
-    }
-    // para que el nombre real sea único
-    const existName = await UserProfile.findOne({ where: { real_name } });
-    if (existName) {
-      return res.status(500).json({
-        msg: "This name already exist.",
-      });
-    }
-    if (bio.length > 1000) {
-      return res.status(400).json({
-        error: "The biography exceeds 100 characters.",
-      });
-    }
-    if (!birthdate) {
-      return res.status(400).json({
-        msg: "The birthdate is required.",
-      });
-    }
-    // para verificar que lo ingresado sea válido
-    const date = new Date(birthdate);
-    if (isNaN(date.getTime())) {
-      return res
-        .status(400)
-        .json({ error: "The birthdate is not a valid date." });
-    }
-    // para verificar que la fecha ingresada no sea mayor a la actual
-    const today = new Date();
-    if (date > today) {
-      return res
-        .status(400)
-        .json({ msg: "The birthdate cannot be in the future." });
-    }
+    // //-------------------------------------VALIDACIONES---------------------------------------------------------------
+    // const { real_name, bio, birthdate } = req.body;
+    // // si el nombre está vacio o excede los 100 caracteres
+    // if (!real_name || real_name.length > 100) {
+    //   return res.status(400).json({
+    //     error: "The name is empty or exceeds 100 characters.",
+    //   });
+    // }
+    // // para que el nombre real sea único
+    // const existName = await UserProfile.findOne({ where: { real_name } });
+    // if (existName) {
+    //   return res.status(500).json({
+    //     msg: "This name already exist.",
+    //   });
+    // }
+    // if (bio.length > 1000) {
+    //   return res.status(400).json({
+    //     error: "The biography exceeds 100 characters.",
+    //   });
+    // }
+    // if (!birthdate) {
+    //   return res.status(400).json({
+    //     msg: "The birthdate is required.",
+    //   });
+    // }
+    // // para verificar que lo ingresado sea válido
+    // const date = new Date(birthdate);
+    // if (isNaN(date.getTime())) {
+    //   return res
+    //     .status(400)
+    //     .json({ error: "The birthdate is not a valid date." });
+    // }
+    // // para verificar que la fecha ingresada no sea mayor a la actual
+    // const today = new Date();
+    // if (date > today) {
+    //   return res
+    //     .status(400)
+    //     .json({ msg: "The birthdate cannot be in the future." });
+    // }
     //------------------------------------------------------------------------------------------------------------------
     const profile = await UserProfile.create(req.body);
     return res.status(201).json({
@@ -129,52 +129,52 @@ export const getProfileById = async (req, res) => {
 
 export const updateProfile = async (req, res) => {
   try {
-    // ----------------------------------VALIDACIÓN------------------------------------------------------------------------------------------------------------
-    const { real_name, bio, birthdate } = req.body;
-    const { id } = req.params;
-    // si el nombre está vacio o excede los 100 carácteres
-    if (!real_name || real_name.length > 100) {
-      return res.status(400).json({
-        error: "The name is empty or exceeds 100 characters.",
-      });
-    }
-    // para que el nombre real sea único, excluyendo el mismo id
-    const existName = await UserProfile.findOne({
-      where: {
-        real_name,
-        id: { [Op.ne]: id }, // excluye este id actual
-      },
-    });
-    if (existName) {
-      return res.status(500).json({
-        msg: "This name already exists.",
-      });
-    }
+    // // ----------------------------------VALIDACIÓN------------------------------------------------------------------------------------------------------------
+    // const { real_name, bio, birthdate } = req.body;
+    // const { id } = req.params;
+    // // si el nombre está vacio o excede los 100 carácteres
+    // if (!real_name || real_name.length > 100) {
+    //   return res.status(400).json({
+    //     error: "The name is empty or exceeds 100 characters.",
+    //   });
+    // }
+    // // para que el nombre real sea único, excluyendo el mismo id
+    // const existName = await UserProfile.findOne({
+    //   where: {
+    //     real_name,
+    //     id: { [Op.ne]: id }, // excluye este id actual
+    //   },
+    // });
+    // if (existName) {
+    //   return res.status(500).json({
+    //     msg: "This name already exists.",
+    //   });
+    // }
 
-    if (bio && bio.length > 1000) {
-      return res.status(400).json({
-        error: "The biography exceeds 1000 characters.",
-      });
-    }
-    if (!birthdate) {
-      return res.status(400).json({
-        msg: "The birthdate is required.",
-      });
-    }
-    // para verificar que lo ingresado sea válido
-    const date = new Date(birthdate);
-    if (isNaN(date.getTime())) {
-      return res
-        .status(400)
-        .json({ error: "The birthdate is not a valid date." });
-    }
-    // para verificar que la fecha ingresada no sea mayor a la actual
-    const today = new Date();
-    if (date > today) {
-      return res
-        .status(400)
-        .json({ msg: "The birthdate cannot be in the future." });
-    }
+    // if (bio && bio.length > 1000) {
+    //   return res.status(400).json({
+    //     error: "The biography exceeds 1000 characters.",
+    //   });
+    // }
+    // if (!birthdate) {
+    //   return res.status(400).json({
+    //     msg: "The birthdate is required.",
+    //   });
+    // }
+    // // para verificar que lo ingresado sea válido
+    // const date = new Date(birthdate);
+    // if (isNaN(date.getTime())) {
+    //   return res
+    //     .status(400)
+    //     .json({ error: "The birthdate is not a valid date." });
+    // }
+    // // para verificar que la fecha ingresada no sea mayor a la actual
+    // const today = new Date();
+    // if (date > today) {
+    //   return res
+    //     .status(400)
+    //     .json({ msg: "The birthdate cannot be in the future." });
+    // }
     // ----------------------------------------------------------------------------------------------------------------------------------------------
     const [update] = await UserProfile.update(req.body, {
       where: { id: req.params.id },
