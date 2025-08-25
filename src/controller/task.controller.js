@@ -84,34 +84,34 @@ export const getTaskById = async (req, res) => {
 
 export const createTask = async (req, res) => {
   try {
-    // -----------------------------------------VALIDACIONES-----------------------------------------------------------
-    console.log(req.body);
-    const { title, description, isComplete, user_id } = req.body;
-    if (!title || title.length > 100) {
-      return res.status(400).json({
-        error: "The title is empty or exceeds 100 characters",
-      });
-    }
-    if (!description || description.length > 100) {
-      return res.status(400).json({
-        error: "The description is empty or exceeds 100 characters",
-      });
-    }
+    // // -----------------------------------------VALIDACIONES-----------------------------------------------------------
+    // console.log(req.body);
+    // const { title, description, isComplete, user_id } = req.body;
+    // if (!title || title.length > 100) {
+    //   return res.status(400).json({
+    //     error: "The title is empty or exceeds 100 characters",
+    //   });
+    // }
+    // if (!description || description.length > 100) {
+    //   return res.status(400).json({
+    //     error: "The description is empty or exceeds 100 characters",
+    //   });
+    // }
 
-    if (typeof isComplete !== "boolean") {
-      console.log("ERROR: The value must not be empty and must be boolean.");
-      return res.status(400).json({
-        error: "The value must not be empty and must be boolean.",
-      });
-    }
+    // if (typeof isComplete !== "boolean") {
+    //   console.log("ERROR: The value must not be empty and must be boolean.");
+    //   return res.status(400).json({
+    //     error: "The value must not be empty and must be boolean.",
+    //   });
+    // }
 
-    if (!user_id) {
-      return res.status(400).json({
-        error: "You must provide a valid or existing user ID.",
-      });
-    }
+    // if (!user_id) {
+    //   return res.status(400).json({
+    //     error: "You must provide a valid or existing user ID.",
+    //   });
+    // }
 
-    // ----------------------------------------------------------------------------------------------------------------
+    // // ----------------------------------------------------------------------------------------------------------------
 
     const task = await Task.create(req.body);
     console.log(task);
@@ -125,26 +125,26 @@ export const createTask = async (req, res) => {
 
 export const upDatetask = async (req, res) => {
   try {
-    // ---------------------------------------VALIDACIONES-------------------------------------------------------------
-    const { title, description, isComplete } = req.body;
-    if (!title || title.length > 100) {
-      return res.status(400).json({
-        error: "The title is empty or exceeds 100 characters",
-      });
-    }
-    if (!description || description.length > 100) {
-      return res.status(400).json({
-        error: "The description is empty or exceeds 100 characters",
-      });
-    }
+    // // ---------------------------------------VALIDACIONES-------------------------------------------------------------
+    // const { title, description, isComplete } = req.body;
+    // if (!title || title.length > 100) {
+    //   return res.status(400).json({
+    //     error: "The title is empty or exceeds 100 characters",
+    //   });
+    // }
+    // if (!description || description.length > 100) {
+    //   return res.status(400).json({
+    //     error: "The description is empty or exceeds 100 characters",
+    //   });
+    // }
 
-    if (typeof isComplete !== "boolean") {
-      console.log("ERROR: The value must not be empty and must be boolean.");
-      return res.status(400).json({
-        error: "The value must not be empty and must be boolean.",
-      });
-    }
-    // ---------------------------------------------------------------------------------------------------------------
+    // if (typeof isComplete !== "boolean") {
+    //   console.log("ERROR: The value must not be empty and must be boolean.");
+    //   return res.status(400).json({
+    //     error: "The value must not be empty and must be boolean.",
+    //   });
+    // }
+    // // ---------------------------------------------------------------------------------------------------------------
 
     const [update] = await Task.update(req.body, {
       where: { id: req.params.id },
