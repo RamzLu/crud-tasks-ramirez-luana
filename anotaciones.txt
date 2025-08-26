@@ -1,0 +1,47 @@
+hice las validaciones para CREAR profile
+    *   hice que el real_name sea único en la base de datos, 
+    sea string, quitar los espacios, que no sea vacio y tenga un máximo de 3 a 25 caracteres
+    *   hice las validaciones del birthdate, que sea formato fecha, 
+    que no sea una fecha superior a la actual.
+    *   hice que la bio sea opcional, que tenga un máximo de 3 a 100 caracteres
+
+validaciones para ACTUALIZAR el perfil
+    *   hice que al buscar por el id tenga que ser un entero, 
+    y que sea existente
+    * que el real_name sea opcional, sea string, no vacio, 
+    y tenga un máximo de 3 a 25 caracteres, también que sea único
+    en la base de datos
+    *  hice que la bio sea opcional, que tenga un máximo de 3 a 100 caracteres
+    *  hice que la fecha de cumpleaños tenga un formato válido y
+    no sea de una fecha superior a la actual
+
+validaciones al ELIMINAR el perfil
+    *   que el id sea correcto
+
+validaciones al BUSCAR POR ID el perfil
+    *   que el id sea correcto
+
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+hice las validaciones para CREAR user
+    *   hice que el name sea único en la base de datos, 
+    sea string, quitar los espacios, que no sea vacio y tenga un máximo de 3 a 25 caracteres
+    *   hice las validaciones del email, quité los espacios, que tenga formato email, 
+    que no sea vacio, y que sea único en la base de datos.
+    *   hice que la password sea fuerte, le quite los espacios, que no sea vacia
+
+validaciones para ACTUALIZAR el user
+    *   hice que al buscar por el id tenga que ser un entero, 
+    y que sea existente
+    * que el name sea opcional, que no tenga espacios, sea string, no vacio, 
+    y tenga un máximo de 3 a 25 caracteres, también que sea único
+    en la base de datos
+    *  hice que el email sea opcional, que tenga un máximo de 3 a 30 caracteres
+    *  hice que la contraseña sea opcional, no vacia y sea una contraseña fuerte
+
+validaciones al ELIMINAR el user
+    *   que el id sea correcto
+
+validaciones al BUSCAR POR ID el user
+    *   que el id sea correcto
