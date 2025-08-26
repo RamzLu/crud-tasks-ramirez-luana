@@ -11,12 +11,19 @@ import { validator } from "../middleware/validator.js";
 import {
   createProfileValidation,
   updateProfileValidation,
+  deleteProfileValidations,
+  getProfileByIdValidations,
 } from "../middleware/validations/profileValidations.js";
 
 export const routerProfile = Router();
 
 routerProfile.get("/profiles", getAllprofiles);
-routerProfile.get("/profiles/:id", getProfileById);
+routerProfile.get(
+  "/profiles/:id",
+  getProfileByIdValidations,
+  validator,
+  getProfileById
+);
 routerProfile.put(
   "/profiles/:id",
   updateProfileValidation,
@@ -29,4 +36,9 @@ routerProfile.post(
   validator,
   createProfile
 );
-routerProfile.delete("/profiles/:id", daleteProfile);
+routerProfile.delete(
+  "/profiles/:id",
+  deleteProfileValidations,
+  validator,
+  daleteProfile
+);

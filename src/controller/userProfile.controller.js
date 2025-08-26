@@ -3,6 +3,7 @@ import { Task } from "../models/task.model.js";
 import { User } from "../models/user.model.js";
 import { UserProfile } from "../models/userProfile.model.js";
 import { Labels } from "../models/label.model.js";
+import { matchedData } from "express-validator";
 
 export const getAllprofiles = async (req, res) => {
   try {
@@ -114,11 +115,12 @@ export const getProfileById = async (req, res) => {
     });
     if (profile) {
       return res.json(profile);
-    } else {
-      return res.status(404).json({
-        msg: "The profile could not be found or doesn't exist.",
-      });
     }
+    //  else {
+    //   return res.status(404).json({
+    //     msg: "The profile could not be found or doesn't exist. CONTROLLERS",
+    //   });
+    // }
   } catch (error) {
     console.error(error);
     return res.status(501).json({
@@ -129,7 +131,7 @@ export const getProfileById = async (req, res) => {
 
 export const updateProfile = async (req, res) => {
   try {
-    // // ----------------------------------VALIDACIÓN------------------------------------------------------------------------------------------------------------
+    // ----------------------------------VALIDACIÓN------------------------------------------------------------------------------------------------------------
     // const { real_name, bio, birthdate } = req.body;
     // const { id } = req.params;
     // // si el nombre está vacio o excede los 100 carácteres
@@ -176,6 +178,8 @@ export const updateProfile = async (req, res) => {
     //     .json({ msg: "The birthdate cannot be in the future." });
     // }
     // ----------------------------------------------------------------------------------------------------------------------------------------------
+
+    // const validatedData = matchedData(req);
     const [update] = await UserProfile.update(req.body, {
       where: { id: req.params.id },
     });
