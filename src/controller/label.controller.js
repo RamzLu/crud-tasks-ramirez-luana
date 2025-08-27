@@ -13,34 +13,57 @@ export const getAllLabels = async (req, res) => {
 
 export const createLabel = async (req, res) => {
   try {
-    const { name_Label } = req.body;
-    const existLabel = await Labels.findOne({ where: { name_Label } });
-    if (existLabel) {
-      return res.status(400).json({
-        msg: "This label already exists.",
-      });
-    }
-    if (!name_Label || name_Label.length > 20) {
-      return res.status(400).json({
-        error: "The label name is empty or exceeds 20 characters",
-      });
-    }
-
-    const label = await Labels.create(req.body);
-    return res.status(201).json({
-      msg: "The label has been created successfully.",
-      label: label,
+    const newLabel = await Labels.create(req.body);
+    const labelToReturn = await Labels.findByPk(newLabel.id, {
+      attributes: {
+        exclude: ["createdAt", "updatedAt"],
+      },
+    });
+    return res.status(200).json({
+      msg: "Label creado correctamente.",
+      labelToReturn: labelToReturn,
     });
   } catch (error) {
     res.status(501).json({
-      error: error.mesagge,
+      error: error.message,
+    });
+  }
+};
+
+export const updateLabel = async (req, res) => {
+  try {
+    const [update] = await Labels.update(req.body, {
+      where: { id: req.params.id },
+    });
+    if (update) {
+      const label = await Labels.findByPk(req.params.id, {
+        attributes: {
+          exclude: ["createdAt", "updatedAt"],
+        },
+      });
+      return res.status(200).json({
+        mesagge: "The label has been updated successfully.",
+        label: label,
+      });
+    } else {
+      return res.status(404).json({
+        msg: "The Label to update has no been found",
+      });
+    }
+  } catch (error) {
+    res.status(501).json({
+      error: error.message,
     });
   }
 };
 
 export const getLabelById = async (req, res) => {
   try {
-    const label = await Labels.findByPk(req.params.id);
+    const label = await Labels.findByPk(req.params.id, {
+      attributes: {
+        exclude: ["createdAt", "updatedAt"],
+      },
+    });
     if (label) {
       res.json(label);
     } else {
@@ -57,7 +80,11 @@ export const getLabelById = async (req, res) => {
 
 export const deleteLabel = async (req, res) => {
   try {
-    const label = await Labels.findByPk(req.params.id);
+    const label = await Labels.findByPk(req.params.id, {
+      attributes: {
+        exclude: ["updatedAt", "createdAt"],
+      },
+    });
     if (!label) {
       return res.status(404).json({
         error: "Label not found.",
