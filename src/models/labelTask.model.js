@@ -1,10 +1,17 @@
+import { DataTypes } from "sequelize";
 import { sequelize } from "../config/database.js";
 import { Labels } from "./label.model.js";
 import { Task } from "./task.model.js";
 
 export const labelTask = sequelize.define(
   "labelTask",
-  {},
+  {
+    id: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      autoIncrement: true,
+    },
+  },
   {
     timestamps: false,
   }
