@@ -9,6 +9,7 @@ import {
 } from "../controller/task.controller.js";
 import {
   createTaskValidator,
+  deleteTaskValidations,
   updateTaskValidator,
 } from "../middleware/validations/taskValidations.js";
 export const routerTask = Router();
@@ -17,4 +18,4 @@ routerTask.get("/task", getAllTask);
 routerTask.post("/task", createTaskValidator, validator, createTask);
 routerTask.get("/task/:id", getTaskById);
 routerTask.put("/task/:id", updateTaskValidator, validator, upDatetask);
-routerTask.delete("/task/:id", deleteTask);
+routerTask.delete("/task/:id", deleteTaskValidations, validator, deleteTask);

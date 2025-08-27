@@ -152,7 +152,7 @@ export const upDatetask = async (req, res) => {
     if (update) {
       const task = await Task.findByPk(req.params.id);
       return res.status(200).json({
-        mesagge: "The user has been updated successfully.",
+        mesagge: "The Task has been updated successfully.",
         task: task,
       });
     } else {
